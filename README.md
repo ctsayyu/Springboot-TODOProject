@@ -14,4 +14,6 @@ Spring security for:
 JasperReport for: 
 - reporting in html or pdf 
 
+Database used for this project is MySQL: 
+name of db: demo
 
