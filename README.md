@@ -15,8 +15,9 @@ JasperReport for:
 - reporting in html or pdf 
 
 Database used for this project is MySQL: 
-name of db: demo
+- name of db: demo
+- table in this db: user, role, users_role, and todo
 
 Template for this Project: 
-credit to colorlib
+- credit to colorlib
 
