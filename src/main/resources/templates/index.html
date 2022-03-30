@@ -1,0 +1,109 @@
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TODO Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //Custom Theme files -->
+	<!-- web font -->
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- //web font -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+        /* Modify the background color */
+         
+        .navbar-header {
+            background-color: #7FB753;
+        }
+        
+        .navbar-inverse {
+            background-color: #7FB753;
+        }
+        .navbar-fixed-top {
+            background-color: #7FB753;
+        }
+        /* Modify brand and text color */
+         
+        .color-me {
+			color: white; 
+			font-size:medium;
+			height: 50px;
+  			line-height: 50px;
+  			text-align:center;
+		}
+		
+		.nav.navbar-nav li a {
+    		color: white;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="color-me" href="#" th:href="@{/}">Home</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+	<!-- main -->
+	<div class="container">
+		<h1 style="color:ghostwhite">TODO Manager</h1>
+		<form th:action="@{/list-all}" method="post" th:object="${user}">
+			<br>
+			<br>
+			<br>
+			<p style="text-align:center; color:ghostwhite">Welcome <span sec:authentication="principal.username"> User</span></p>
+			<p style="text-align:center; color:ghostwhite">Click button below to see your TODO list.</p>
+			<input type="submit" value="TODO LIST">
+	</div>
+
+	<!-- copyright -->
+	<div class="colorlibcopy-agile">
+		<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/"
+				target="_blank">Colorlib</a></p>
+	</div>
+	<!-- //copyright -->
+	<ul class="colorlib-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	</div>
+	<!-- //main -->
+</body>
+
+</html>

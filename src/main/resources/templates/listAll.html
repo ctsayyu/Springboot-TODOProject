@@ -1,0 +1,195 @@
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TODO List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Custom Theme files -->
+	<link href="css/liststyle.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //Custom Theme files -->
+	<!-- web font -->
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- //web font -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		/* Modify the background color */
+
+		.navbar-header {
+			background-color: #7FB753;
+		}
+
+		.navbar-inverse {
+			background-color: #7FB753;
+		}
+
+		.navbar-fixed-top {
+			background-color: #7FB753;
+		}
+
+		/* Modify brand and text color */
+
+		.color-me {
+			color: white;
+			font-size: medium;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+		}
+
+		.nav.navbar-nav li a {
+			color: white;
+		}
+
+		td {
+			border-left: 1px solid white;
+			border-top: 1px solid white;
+			color: white;
+			font-size:18px;
+			height:60px;
+			vertical-align:middle;
+			text-align: center;
+		}
+
+		th {
+			border-left: 1px solid white;
+			border-top: 1px solid white;
+			color:white;
+			font-size: 18px;
+			height:60px;
+			vertical-align:middle;
+			text-align: center;
+		}
+
+		table {
+			border-right: 1px solid white;
+			border-bottom: 1px solid white;
+			color:white;
+			font-size:18px;
+			width: 100%;
+		}
+
+		input[type=text] {
+			width: 50%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+			border: 3px solid white;
+			-webkit-transition: 0.5s;
+			transition: 0.5s;
+			outline: none;
+		}
+
+		input[type=text]:focus {
+			border: 3px solid lightgrey;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="color-me" href="#" th:href="@{/}">Home</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+	<!-- main -->
+	<div align="center">
+		<h1 style="color:ghostwhite; font-size:48px">TODO List</h1>
+		<a href="/new" style="color: rgb(255, 232, 232); font-size:25px;">Create New TODO</a>
+		<form th:action="@{/list-all}">
+		<br>
+		<br>
+			<p style="color:white">Search Engine: </p><input type="text" name="keyword" id="keyword" size="30" th:value="${keyword}" required />
+			&nbsp;
+			<input type="submit" value="Search" />
+			&nbsp;
+			<input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+		</form>
+		<script type="text/javascript">
+			function clearSearch() {
+				window.location = "[[@{/list-all}]]";
+			}
+		</script>
+		<br /><br />
+		<table border="2" cellpadding="50" style="width:50%">
+			<thead>
+				<tr>
+					<th style="text-align:center">ID</th>
+					<th style="text-align:center">User</th>
+					<th style="text-align:center">Description</th>
+					<th style="text-align:center">Target Date</th>
+					<th style="text-align:center">Star Meter</th>
+					<th style="text-align:center">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="todo : ${listTodos}">
+					<td style="text-align:center" th:text="${todo.id}">ID</td>
+					<td style="text-align:center" th:text="${todo.user}">User</td>
+					<td style="text-align:center" th:text="${todo.description}">Description</td>
+					<td style="text-align:center" th:text="${todo.targetdate}">Target Date</td>
+					<td style="text-align:center" th:text="${todo.starmeter}">Star Meter</td>
+					<td style="text-align:center">
+						<a th:href="@{'/edit/' + ${todo.id}}" style="color: rgb(255, 232, 232);">Edit</a>
+						&nbsp;&nbsp;&nbsp;
+						<a th:href="@{'/delete/' + ${todo.id}}" style="color: rgb(255, 232, 232) ;">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+		<p style="color:white;font-size:22px;">Save TODO File</p>
+		<a href="/report/html" style="color: rgb(255, 232, 232")>HTML</a>
+		<a href="/report/pdf" style="color: rgb(255, 232, 232)">PDF</a>
+	</div>
+
+	<!-- copyright -->
+	<div class="colorlibcopy-agile">
+		<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/"
+				target="_blank">Colorlib</a></p>
+	</div>
+	<!-- //copyright -->
+	<ul class="colorlib-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	</div>
+	<!-- //main -->
+</body>
+
+</html>
